@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 
 const ButtonWithEffect = () => {
   const [buttonColor, setButtonColor] = useState('blue');
+  const [conditionMet, setConditionMet] = useState(false);
 
   useEffect(() => {
-    console.log('This effect runs only on the first render');
-  }, []);
+    if (conditionMet) {
+      setButtonColor('green');
+    } else {
+      setButtonColor('blue');
+    }
+  }, [conditionMet]);
 
   const handleButtonClick = () => {
-    // Generate a random color for the button
-    const colors = ['red', 'green', 'blue', 'yellow', 'orange', 'purple'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    setButtonColor(randomColor);
+    // Simulate a condition that changes based on the current color
+    setConditionMet(buttonColor === 'blue');
   };
 
   return (
@@ -25,3 +28,4 @@ const ButtonWithEffect = () => {
 };
 
 export default ButtonWithEffect;
+
